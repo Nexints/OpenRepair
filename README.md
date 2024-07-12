@@ -1,4 +1,4 @@
-# Troubleshooter for Windows
+# OpenRepair for Windows
 Just a troubleshooting tool specific to Windows. Made 100% in batch.
 
 # Disclaimer
