@@ -8,6 +8,7 @@ if not '%errorlevel%' == '0' (
 
 :: Change directory with passed argument. Processes started with
 :: "runas" start with forced C:\Windows\System32 workdir
+setx %1 %1
 cd /d %1
 if "%nexchoice%"=="" set nexchoice=0
 if "%nexmanual%"=="" set nexmanual=0
@@ -27,18 +28,20 @@ echo 1: Repair with step by step process (Recommended)
 echo 2: Automatic Repair (With Restarts)
 echo 3: Automatic Repair (Without Restarts)
 echo 4: WinPE Repair (Auto) (Under Construction)
-echo 5: Exit
+echo 5: Step-By-Step Windows Reinstall to USB (Under Construction)
+echo 6: Exit
 echo.
 echo Dev Info:
 echo File Name: %~nx0
 echo Current Directory: %cd%
 echo File Name + Directory: %~f0
-choice /c 12345
+choice /c 123456
 if %errorlevel%==1 goto ynmanual
 if %errorlevel%==2 goto ynauto
 if %errorlevel%==3 goto ynautonr
 if %errorlevel%==4 goto ynautope
-if %errorlevel%==5 goto exit
+if %errorlevel%==5 goto ynreinstall
+if %errorlevel%==6 goto exit
 goto start
 
 :manual
@@ -191,6 +194,24 @@ goto exit
 :ynautope
 echo This is currently under construction.
 pause
+goto exit
+
+:ynreinstall
+cls
+echo Are you sure? This REINSTALLS WINDOWS onto a seperate USB drive.
+choice /c yn
+if %errorlevel%==1 goto reinstall
+if %errorlevel%==2 goto start
+
+:reinstall
+cls
+echo Make sure the "WinInstaller" batch file names are not modified. Modifying these names will have unintended side effects.
+echo In the W10 folder, put a UNZIPPED Windows 10 iso there.
+echo In the W11 folder, put a UNZIPPED Windows 11 iso there.
+echo You can get these from the official Microsoft store.
+pause
+cd ./WinInstaller
+Installer.bat
 goto exit
 
 :exit
