@@ -1,7 +1,7 @@
 # OpenRepair for Windows
 Just a troubleshooting tool specific to Windows. Made 100% in batch.
 
-> [!Disclaimer]
+> [!WARNING]
 > This tool is not affiliated to Microsoft in any way, shape or form.
 
 # Disclaimer
